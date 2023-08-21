@@ -14,18 +14,6 @@ from amazon_sentiment_model.config.core import TRAINED_MODEL_DIR, TRAINED_TOKEN_
 
 
 def pre_pipeline_preparation(*, data_frame: pd.DataFrame) -> pd.DataFrame:
-  
-    # # Delete unused fields
-    # # work around for not being able to specify empty lists in yaml file
-    # len_unused = len(config.model_config.unused_fields)
-    # if len_unused > 0:
-    #     drop_list = []
-    #     col_list = data_frame.columns.tolist()
-    #     unused_fields = config.model_config.unused_fields
-    #     #only select the columns from unused fieldss that exist in data frame
-    #     drop_list = [x for x in unused_fields if x in col_list]
-    #     if (len(drop_list) > 0):
-    #         data_frame.drop(columns=drop_list, inplace=True)
 
     # drop unnecessary variables
     data_frame.drop(labels=config.model_config.unused_fields, axis=1, inplace=True)
@@ -33,9 +21,7 @@ def pre_pipeline_preparation(*, data_frame: pd.DataFrame) -> pd.DataFrame:
     return data_frame
 
 def load_dataset(*, file_name: str) -> pd.DataFrame:
-    # dataframe = pd.read_csv(filepath_or_buffer=file_name, usecols=config.model_config.csv_fields)
     dataframe = pd.read_csv(filepath_or_buffer=file_name)
-
     transformed = pre_pipeline_preparation(data_frame=dataframe)
     return transformed
 
