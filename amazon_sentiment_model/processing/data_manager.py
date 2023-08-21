@@ -10,7 +10,7 @@ from keras.models import save_model
 from keras.preprocessing.text import Tokenizer,tokenizer_from_json
 
 from amazon_sentiment_model import __version__ as _version
-from amazon_sentiment_model.config.core import TRAINED_MODEL_DIR, config
+from amazon_sentiment_model.config.core import TRAINED_MODEL_DIR, TRAINED_TOKEN_DIR, config
 
 
 def pre_pipeline_preparation(*, data_frame: pd.DataFrame) -> pd.DataFrame:
@@ -70,10 +70,10 @@ def save_model_data(model_to_save, tokenizer):
     for model_file in TRAINED_MODEL_DIR.iterdir():
         model_file.unlink()
     keras.models.save_model(model_to_save, TRAINED_MODEL_DIR/f"{config.app_config.model_save_file}{_version}.keras")
-    save_tokenizer(tokenizer_to_save=tokenizer, file_name=TRAINED_MODEL_DIR/f"{config.app_config.tokenizer_save_file}{_version}.json")
+    save_tokenizer(tokenizer_to_save=tokenizer, file_name=TRAINED_TOKEN_DIR/f"{config.app_config.tokenizer_save_file}{_version}.json")
     
     
 def load_model_data( model_file_name: str, tokenizer_file_name: str):
     model = keras.models.load_model(TRAINED_MODEL_DIR/model_file_name)
-    tokenizer = load_tokenizer(filename=TRAINED_MODEL_DIR/tokenizer_file_name)
+    tokenizer = load_tokenizer(filename=TRAINED_TOKEN_DIR/tokenizer_file_name)
     return tuple((model, tokenizer))
