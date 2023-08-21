@@ -11,7 +11,7 @@ import string
 import numpy as np
 from random import randint
 from amazon_sentiment_model import __version__ as _version
-from amazon_sentiment_model.config.core import DATASET_DIR, TRAINED_MODEL_DIR, config
+from amazon_sentiment_model.config.core import DATASET_DIR, TRAINED_TOKEN_DIR, config
 from amazon_sentiment_model.processing.data_manager import load_tokenizer
 
 
@@ -38,6 +38,6 @@ def test_input_data(sample_input_data):
     assert len(np.unique(y_label,axis=0,return_counts=True)[0]) == 2
     #verify that Tokenizer can be loaded and is not null
     tokenizer_file_name = f"{config.app_config.tokenizer_save_file}{_version}.json"
-    tokenizer = load_tokenizer(filename=TRAINED_MODEL_DIR/tokenizer_file_name)
+    tokenizer = load_tokenizer(filename=TRAINED_TOKEN_DIR/tokenizer_file_name)
     assert tokenizer != None
     
