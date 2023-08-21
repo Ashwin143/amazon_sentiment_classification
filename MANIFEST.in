@@ -1,0 +1,19 @@
+include *.txt
+include *.md
+include *.pkl
+include *.keras
+include *.json
+recursive-include ./amazon_sentiment_model *
+
+include amazon_sentiment_model/trained_models/*.keras
+include amazon_sentiment_model/trained_models/*.json
+include amazon_sentiment_model/VERSION
+include amazon_sentiment_model/config.yml
+
+include ./requirements/requirements.txt
+include ./requirements/test_requirements.txt
+exclude *.log
+exclude *.cfg
+
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]

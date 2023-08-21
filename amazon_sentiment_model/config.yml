@@ -1,0 +1,58 @@
+# Package Overview
+package_name: amazon_sentiment_model
+
+# Data Files
+training_data_file: https://cdn.iisc.talentsprint.com/AIandMLOps/MiniProjects/Datasets/Reviews.csv 
+test_data_file: test.csv
+
+# Variables
+# The variable we are attempting to predict (Survival)
+target: Sentiment
+
+model_name: amazon_sentiment_model
+model_save_file: amazon_sentiment_model
+tokenizer_save_file: amazon_sentiment_model_tokenizer
+
+
+features:      # final features to be use
+  - Text
+
+
+unused_fields:  # Features to drop before pipeline
+  - Id
+  - ProductId
+  - UserId
+  - ProfileName
+  - HelpfulnessNumerator
+  - HelpfulnessDenominator
+  - Time
+  - Summary
+
+epoch_list:
+  - 20
+  - 30
+
+Score_Sentiment_mapping:
+    1: 0
+    2: 0
+    3: 1
+    4: 1
+    5: 1
+ 
+csv_fields:
+  - Text
+  - Score
+
+# set train/test split
+train_size: 0.60
+valid_size: 0.40
+
+# to set the random seed
+random_state: 42
+
+# alogrithm parameters
+n_estimators: 100
+max_depth: 10
+num_tokenizer_words: 5000
+max_seq_len: 256
+embedding_dim: 32
