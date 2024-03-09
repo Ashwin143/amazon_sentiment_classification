@@ -1,1 +1,1 @@
-# amazon_sentiment_classification
+## Sentiment Classification on Amazon food reviews ##
